@@ -38,3 +38,8 @@ test('emails are mailto links and there is no misleading dead contact form', () 
   assert.match(html, /mailto:info@serinabhasera\.co\.zw/);
   assert.doesNotMatch(html, /<form\b/i);
 });
+
+test('service enquiries and sector cards have real destinations', () => {
+  assert.equal((html.match(/class="service-icon" href="#contact"/g) || []).length, 6);
+  assert.equal((html.match(/class="sector" href="#contact"/g) || []).length, 6);
+});
