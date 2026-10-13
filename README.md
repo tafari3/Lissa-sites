@@ -1,42 +1,48 @@
-# Serina Bhasera Consultancy — website
+# Serina Bhasera Consultancy website
 
-A responsive, static-first brochure website for Serina Bhasera Consultancy, developed from the client-supplied brochure and follow-up service list.
+Professional brochure-led corporate site, in development.
 
-## Preview locally
+## Run locally
 
-Requirements: Node.js 20+.
+Node.js 20+ is recommended. From the repository root:
 
 ```sh
 npm run dev
 ```
 
-Then open `http://localhost:4173`. No packages need to be installed.
+Open http://localhost:4173. There are no external package dependencies. `npm test` runs the content/navigation checks.
 
-Run the basic checks with `npm test`.
+## Pages
 
-## Content and images
+- `index.html` — home, services overview, company overview, sectors, enquiry CTA
+- `about.html` — the firm and multidisciplinary approach
+- `services.html` — six brochure practice areas and related advisory
+- `sectors.html` — six sectors served
+- `contact.html` — direct email enquiry and office cities
+- `assets/styles.css` — global design and responsive layouts
+- `assets/site.js` — mobile navigation, keyboard/escape handling, copyright year
+- `assets/serina-logo.png` — client-brochure logo crop; replace when an official master file arrives
+- `scripts/build-pages.py` — templates and site copy; rerun after content changes
 
-- `index.html` — website copy, headings, service listings, sectors and links.
-- `assets/styles.css` — colours, typography, spacing, layout and mobile responsiveness.
-- `assets/site.js` — mobile navigation and current-year footer.
-- `assets/architectural-study.svg` — illustrative hero art; replace later with an approved photo by updating the `src` and `alt` text in `index.html`.
-- `assets/planning-lines.svg` — illustrative supporting art; similarly replaceable.
-- `assets/serina-wordmark.svg` — clean vector interpretation of the brochure logo for preview; replace with the official master logo when available.
+## Brand & visual direction
 
-The website deliberately uses **illustrative architectural artwork**, not invented photographs of the client's work. Future approved project photography can replace these assets.
+A restrained corporate/editorial direction: existing navy, muted gold and white, clear typography, minimal effects, border-led service lists rather than generic rounded cards.
 
-## Required verification before production
+Temporary architecture/interior stock photography is used as **illustration only**, never as evidence of projects completed by the firm. Replace with approved client images later. Current illustrative image endpoints:
 
-1. Confirm the scope of **auditing** and **asset valuation** before adding detailed service descriptions. Both are labelled with `*` in this draft.
-2. Confirm that “Spartial planning” in the client's message means **spatial planning**.
-3. Confirm the email `info@serinabhasera.co.zw` is active and correct. The brochure supplies that email; it has not been externally verified.
-4. Get approved company photos/project examples and the original high-resolution/vector logo when possible.
-5. The phone numbers and Harare street address in the brochure look provisional; they are intentionally **not** published.
-6. Get client sign-off on public copy and professional/regulatory claims (e.g. EMA accreditation) before final launch.
-7. Decide and configure production hosting, domain, HTTPS and enquiry delivery. This draft uses a normal `mailto:` email action and **does not pretend to have a working server-side contact form**.
+- https://images.unsplash.com/photo-1486406146926-c627a92ad1ab
+- https://images.unsplash.com/photo-1497366754035-f200968a6e72
 
-## Hosting
+The site layout still works on fallback colours if remote images do not load. In final production, host approved images locally for dependable performance.
 
-This project is plain HTML/CSS/JS, so it can be deployed to almost any static host, including GitHub Pages, Cloudflare Pages, Netlify or a standard web server. It does not need a backend or database in its current form.
+## Before client launch
 
-Never commit client credentials or private project documents to this **public** repository.
+- Replace temporary photos with approved client-owned or licensed project/context photos.
+- Replace cropped logo with official original if provided.
+- Verify info@serinabhasera.co.zw actually receives mail; it's from client brochure.
+- Verify professional/regulatory claims and final service scopes (including auditing and valuation).
+- Confirm client office addresses, phone numbers, and any WhatsApp/business channels before showing them. The brochure appears to contain sample contact values, so they are intentionally not published.
+- Remove staging-only `noindex` meta and `robots.txt` block only after client approval.
+- Confirm domain/hosting and final enquiry delivery. There is **no fake contact form**; `mailto:` opens a real email client.
+
+**Security**: This is a public repository. Never commit credentials, private client documents, or sensitive client information.

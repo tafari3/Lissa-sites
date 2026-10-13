@@ -1,31 +1,28 @@
 (() => {
   'use strict';
   const toggle = document.querySelector('.menu-toggle');
-  const navigation = document.querySelector('.primary-nav');
-  const header = document.querySelector('.site-header');
-  if (toggle && navigation) {
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav) {
     const close = () => {
+      nav.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open navigation');
-      navigation.classList.remove('is-open');
-      document.body.classList.remove('nav-open');
+      toggle.setAttribute('aria-label', 'Open menu');
     };
     toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      toggle.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-      navigation.classList.toggle('is-open', !expanded);
-      document.body.classList.toggle('nav-open', !expanded);
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      nav.classList.toggle('is-open', open);
     });
-    navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
-    window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => { if (event.matches) close(); });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    document.addEventListener('click', e => { if (!nav.contains(e.target) && !toggle.contains(e.target)) close(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 930) close(); });
   }
-  if (header) {
-    const setScrolled = () => header.classList.toggle('has-scrolled', window.scrollY > 16);
-    setScrolled();
-    window.addEventListener('scroll', setScrolled, { passive: true });
-  }
-  const year = document.getElementById('year');
-  if (year) year.textContent = String(new Date().getFullYear());
+  document.querySelectorAll('.hero-image img, .sector-image img, .image-story-visual img').forEach(img => {
+    const failed = () => { img.classList.add('image-failed'); };
+    img.addEventListener('error', failed);
+    if (img.complete && img.naturalWidth === 0) failed();
+  });
+  document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 })();
