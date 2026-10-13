@@ -26,7 +26,7 @@ Open http://localhost:4173. There are no external package dependencies. `npm tes
 
 ## Brand & visual direction
 
-A restrained corporate/editorial direction: existing navy, muted gold and white, clear typography, minimal effects, border-led service lists rather than generic rounded cards.
+A bolder editorial corporate direction: midnight navy, vivid heritage gold and warm white, with high-contrast headings, border-led service lists and carefully paced light/dark sections. Photo areas have designed text/architectural-grid fallbacks if third-party images fail to load.
 
 Temporary architecture/interior stock photography is used as **illustration only**, never as evidence of projects completed by the firm. Replace with approved client images later. Current illustrative image endpoints:
 

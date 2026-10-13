@@ -55,7 +55,13 @@ test('site has actual client branding and no generic illustration assets',()=>{
  assert.ok(existsSync(join(root,'assets/serina-logo.png')));
  assert.ok(existsSync(join(root,'assets/favicon.png')));
  assert.doesNotMatch(allText,/architectural-study\.svg|planning-lines\.svg|serina-wordmark\.svg/);
- assert.match(css,/#152c3e/i);
+ assert.match(css, /--navy: #0b1f3a/i);
+ assert.match(css, /--gold-bright: #ebbd59/i);
+ assert.match(css, /\.hero-copy \{ position: relative; background: #0b2342/i);
+ assert.match(css, /\.page-intro \{ background: #0d2a4c/i);
+ assert.match(js, /classList\.add\('has-image'\)/);
+ assert.match(allText, /hero-graphic-title/);
+ assert.match(allText, /sector-visual-fallback/);
 });
 test('unconfirmed brochure address or sample phone numbers not exposed',()=>{
  assert.doesNotMatch(allText, /123 Enterprise Drive|\+263\s*78\s*123\s*4567|\+263\s*71\s*234\s*5678/);
