@@ -1,0 +1,12 @@
+{
+  "name": "serina-bhasera-consultancy-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static, dependency-free Serina Bhasera Consultancy website",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test"
+  },
+  "engines": { "node": ">=20" }
+}
