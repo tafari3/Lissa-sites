@@ -59,9 +59,10 @@ test('site has actual client branding and no generic illustration assets',()=>{
  assert.match(css, /--gold-bright: #ebbd59/i);
  assert.match(css, /\.hero-copy \{ position: relative; background: #0b2342/i);
  assert.match(css, /\.page-intro \{ background: #0d2a4c/i);
- assert.match(js, /classList\.add\('has-image'\)/);
- assert.match(allText, /hero-graphic-title/);
- assert.match(allText, /sector-visual-fallback/);
+ assert.match(content.get('index.html'), /class="hero-pathways"/);
+ assert.match(content.get('index.html'), /class="estate-spotlight"/);
+ assert.match(content.get('about.html'), /class="approach-panel"/);
+ assert.doesNotMatch(allText, /images\.unsplash\.com|hero-graphic-title|sector-visual-fallback/);
 });
 test('unconfirmed brochure address or sample phone numbers not exposed',()=>{
  assert.doesNotMatch(allText, /123 Enterprise Drive|\+263\s*78\s*123\s*4567|\+263\s*71\s*234\s*5678/);
@@ -88,7 +89,7 @@ test('Netlify enquiry form accepts visitors without email addresses',()=>{
 test('estate service directs interested visitors to preselected will enquiries',()=>{
  const s=content.get('services.html');
  assert.match(s,/id="estate"/);
- assert.match(s,/Let us help you draft your will/);
+ assert.match(s,/Let us help you prepare your will/);
  assert.match(s,/contact\.html\?service=will-preparation#enquiry/);
  assert.match(js,/URLSearchParams/);
 });
@@ -97,6 +98,19 @@ test('primary enquiry navigation opens the contact form, and unsupported preview
  assert.match(js,/unsupportedPreview/);
  assert.match(js,/preventDefault/);
  assert.match(content.get('contact.html'),/id="form-preview-note"/);
+});
+test('homepage has a working-looking enquiry journey without email-only actions',()=>{
+ const html=content.get('index.html');
+ const main=html.split('<main id="main">')[1].split('</main>')[0];
+ assert.doesNotMatch(main,/href="mailto:/,'homepage primary journeys must never require an email app');
+ assert.match(main,/class="hero-pathways"/);
+ assert.match(main,/contact\.html\?service=will-preparation#enquiry/);
+ assert.match(main,/href="contact\.html#enquiry">Send an enquiry/);
+ assert.match(main,/href="services\.html#governance"/);
+});
+test('no remote image dependence or fictitious social proof in generated pages',()=>{
+ assert.doesNotMatch(allText,/unsplash|stock photography|project showcase|client testimonials|awards won/i);
+ assert.doesNotMatch(allText,/hero-grid-num|hero-photo-rule|image-with-fallback/);
 });
 test('mobile navigation includes accessible state and close actions',()=>{
  assert.match(js,/aria-expanded/);
