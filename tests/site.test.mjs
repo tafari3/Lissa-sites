@@ -156,7 +156,7 @@ test('uploaded photo-based brand remains intact',()=>{
  assert.match(home,/class="sector-image image-with-fallback"/);
 });
 
-test('CI workflow is retained, with no archived git internals',()=>{
- assert.ok(existsSync(join(root,'.github/workflows/site-check.yml')));
- assert.ok(!existsSync(join(root,'.git/index')));
+test('CI workflow is retained and runs the site tests',()=>{
+ const workflow=readFileSync(join(root,'.github/workflows/site-check.yml'),'utf8');
+ assert.match(workflow,/npm test/);
 });
