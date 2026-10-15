@@ -27,21 +27,18 @@ Open http://localhost:4173. There are no external package dependencies. `npm tes
 
 ## Brand & visual direction
 
-Editorial corporate design using the client's navy-and-gold identity. The hero is a concise introduction with three linked advisory pathways; dedicated estate/will-preparation enquiries are surfaced on the homepage and Services. No remote stock images, simulated case studies, fabricated results or misleading testimonials are displayed. The layout remains complete with local brand assets only.
+A bolder editorial corporate direction: midnight navy, vivid heritage gold and warm white, with high-contrast headings, border-led service lists and carefully paced light/dark sections. Photo areas have designed text/architectural-grid fallbacks if third-party images fail to load.
 
-### Design contract
+Temporary architecture/interior stock photography is used as **illustration only**, never as evidence of projects completed by the firm. Replace with approved client images later. Current illustrative image endpoints:
 
-- High-contrast midnight navy, gold and restrained warm ivory. Colour emphasises actions, not decoration.
-- Serif headlines with readable sans-serif copy; no gratuitous card grids, gradients or glass effects.
-- The homepage leads visitors to either services or a short, phone-first contact enquiry.
-- Estate and will-preparation enquiries collect only contact information and a short initial description, never intimate family or asset details.
-- All important links, including homepage CTAs, lead to site pages, not email software.
-- Mobile header/nav, interactive form select prefill and keyboard controls remain accessible.
-- Test before any client-facing release. Netlify form detection and recipient notifications require configuration in the actual Netlify account; passing source tests does not establish live delivery.
+- https://images.unsplash.com/photo-1486406146926-c627a92ad1ab
+- https://images.unsplash.com/photo-1497366754035-f200968a6e72
+
+The site layout still works on fallback colours if remote images do not load. In final production, host approved images locally for dependable performance.
 
 ## Before client launch
 
-- Add contextual photography only if suitable client-approved images are supplied; no photos are necessary for the current design.
+- Replace temporary photos with approved client-owned or licensed project/context photos.
 - Replace cropped logo with official original if provided.
 - Verify info@serinabhasera.co.zw actually receives mail; it's from client brochure.
 - Verify professional/regulatory claims and final service scopes (including auditing and valuation).

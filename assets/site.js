@@ -19,6 +19,15 @@
     document.addEventListener('click', e => { if (!nav.contains(e.target) && !toggle.contains(e.target)) close(); });
     window.addEventListener('resize', () => { if (window.innerWidth > 930) close(); });
   }
+  document.querySelectorAll('.image-with-fallback').forEach(frame => {
+    const img = frame.querySelector('img');
+    if (!img) return;
+    const loaded = () => { frame.classList.add('has-image'); img.classList.remove('image-failed'); };
+    const failed = () => { frame.classList.remove('has-image'); img.classList.add('image-failed'); };
+    img.addEventListener('load', loaded);
+    img.addEventListener('error', failed);
+    if (img.complete) (img.naturalWidth > 0 ? loaded : failed)();
+  });
   const serviceSelect = document.getElementById('enquiry-service');
   if (serviceSelect) {
     const requested = new URLSearchParams(window.location.search).get('service');
