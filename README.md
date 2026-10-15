@@ -1,53 +1,47 @@
 # Serina Bhasera Consultancy website
 
-Professional brochure-led corporate site, in development.
+Brochure-led professional static website with a photograph-led navy-and-gold design.
+
+## Overview
+
+The October 2026 ZIP was reconciled against GitHub `main` rather than copied over it.
+It was based on the older `0858000` revision. New contact methods and a WhatsApp
+widget were integrated; the latest phone-first Netlify enquiry form and estate/will
+CTA were preserved. The ZIP's email-required form, mailto-only submission and
+fake success confirmation were deliberately not imported.
 
 ## Run locally
 
-Node.js 20+ is recommended. From the repository root:
+Node.js 20+ required. Run `npm run dev` and open http://localhost:4173.
+Run `npm test` for content, accessibility and form-contract checks.
+`python scripts/build-pages.py` regenerates the 6 HTML pages from shared templates.
 
-```sh
-npm run dev
-```
+## Hosting and forms
 
-Open http://localhost:4173. There are no external package dependencies. `npm test` runs the content/navigation checks.
+The form on `contact.html` is a **real Netlify-compatible HTML form** (`website-enquiry`).
+The visitor supplies a name, phone or WhatsApp number and short message.
+Email is optional. The estate will-preparation link preselects its service.
+The form uses Netlify Forms on the deployed Netlify site, and shows a reminder
+instead of claiming success when run on a local or GitHub Pages preview.
 
-## Pages
+**Netlify operational setup required:** Enable Forms/form detection if not already
+configured, redeploy this version, configure appropriate team-only notifications,
+and conduct a real non-sensitive test submission. Submission delivery on the existing
+Netlify deployment has **not** yet been verified.
 
-- `index.html` — home, services overview, company overview, sectors, enquiry CTA
-- `about.html` — the firm and multidisciplinary approach
-- `services.html` — six brochure practice areas and related advisory
-- `sectors.html` — six sectors served
-- `contact.html` — Netlify Forms-based enquiries: name, phone/WhatsApp, optional email, subject, short message, consent
-- `thank-you.html` — confirmation page after Netlify processes a submission
-- `assets/styles.css` — global design and responsive layouts
-- `assets/site.js` — mobile navigation, keyboard/escape handling, copyright year
-- `assets/serina-logo.png` — client-brochure logo crop; replace when an official master file arrives
-- `scripts/build-pages.py` — templates and site copy; rerun after content changes
+## Uploaded updates and unverified business details
 
-## Brand & visual direction
+The uploaded ZIP introduced contact information for:
+- nevanj@serinabhasera.co.zw and victor@serinabhasera.co.zw
+- WhatsApp direct lines +263 77 622 4970 and +263 78 229 5158
+- 151 Kwame Nkrumah Ave, Harare; Stand No. 965 Nemamwa, Masvingo
 
-A bolder editorial corporate direction: midnight navy, vivid heritage gold and warm white, with high-contrast headings, border-led service lists and carefully paced light/dark sections. Photo areas have designed text/architectural-grid fallbacks if third-party images fail to load.
+These are **user-uploaded edits, not independently verified contact details**.
+Confirm their ownership/correctness with the consultancy before final launch,
+and confirm which mailbox should receive Netlify notifications. No credentials
+or customer submissions belong in this public repository.
 
-Temporary architecture/interior stock photography is used as **illustration only**, never as evidence of projects completed by the firm. Replace with approved client images later. Current illustrative image endpoints:
-
-- https://images.unsplash.com/photo-1486406146926-c627a92ad1ab
-- https://images.unsplash.com/photo-1497366754035-f200968a6e72
-
-The site layout still works on fallback colours if remote images do not load. In final production, host approved images locally for dependable performance.
-
-## Before client launch
-
-- Replace temporary photos with approved client-owned or licensed project/context photos.
-- Replace cropped logo with official original if provided.
-- Verify info@serinabhasera.co.zw actually receives mail; it's from client brochure.
-- Verify professional/regulatory claims and final service scopes (including auditing and valuation).
-- Confirm client office addresses, phone numbers, and any WhatsApp/business channels before showing them. The brochure appears to contain sample contact values, so they are intentionally not published.
-- Remove staging-only `noindex` meta and `robots.txt` block only after client approval.
-- Netlify preview is already used by the project; confirm whether it auto-deploys from GitHub or was manually published.
-- Enable **Forms > Form detection** in the Netlify dashboard, then redeploy the site including `contact.html`. Enquiries appear under Netlify Forms; configure optional email notifications after the client confirms the destination address.
-- Check an actual test submission in the Netlify dashboard **before** treating the form as live. A successful local build or GitHub Actions run does not prove delivery.
-- Keep will-related enquiries to contact details only. Do not ask for beneficiaries, ID numbers, financial information, or private will instructions in this form. Approve legal/professional copy and privacy handling before final launch.
-- The local and GitHub Pages previews do not accept submissions (they display an explanatory message instead); the Netlify deployment must be configured first.
-
-**Security**: This is a public repository. Never commit credentials, private client documents, or sensitive client information.
+Temporary Unsplash photo URLs illustrate the built environment; they are not
+represented as client projects. Obtain approved licensed/company imagery for launch.
+Remove staging `noindex`/`robots.txt` exclusions only after the client authorises
+indexing and the contact, privacy and legal review is complete.

@@ -46,5 +46,40 @@
       if (notice) { notice.hidden = false; notice.focus(); }
     });
   }
+  // WhatsApp Widget Toggle
+  const waTrigger = document.getElementById('wa-trigger');
+  const waPopover = document.getElementById('wa-popover');
+  const waClose = document.getElementById('wa-popover-close');
+  if (waTrigger && waPopover) {
+    const toggleWa = (open) => {
+      const isOpen = open !== undefined ? open : waPopover.hidden;
+      waPopover.hidden = !isOpen;
+      waTrigger.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen && waClose) waClose.focus();
+    };
+    waTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleWa();
+    });
+    if (waClose) {
+      waClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleWa(false);
+        waTrigger.focus();
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !waPopover.hidden) {
+        toggleWa(false);
+        waTrigger.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (!waPopover.hidden && !waPopover.contains(e.target) && e.target !== waTrigger) {
+        toggleWa(false);
+      }
+    });
+  }
+
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 })();
