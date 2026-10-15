@@ -28,5 +28,23 @@
     img.addEventListener('error', failed);
     if (img.complete) (img.naturalWidth > 0 ? loaded : failed)();
   });
+  const serviceSelect = document.getElementById('enquiry-service');
+  if (serviceSelect) {
+    const requested = new URLSearchParams(window.location.search).get('service');
+    if (requested && [...serviceSelect.options].some(option => option.value === requested)) {
+      serviceSelect.value = requested;
+    }
+  }
+  // Static local/GitHub Pages previews cannot accept Netlify form submissions.
+  const enquiryForm = document.getElementById('enquiry-form');
+  const hostname = window.location.hostname;
+  const unsupportedPreview = window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.github.io');
+  if (enquiryForm && unsupportedPreview) {
+    enquiryForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const notice = document.getElementById('form-preview-note');
+      if (notice) { notice.hidden = false; notice.focus(); }
+    });
+  }
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 })();
