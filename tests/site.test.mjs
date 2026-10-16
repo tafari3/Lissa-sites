@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root=join(dirname(fileURLToPath(import.meta.url)), '..');
-const pageNames=['index.html','about.html','services.html','sectors.html','contact.html','thank-you.html'];
+const pageNames=['index.html','about.html','services.html','sectors.html','contact.html','thank-you.html','will-drafting.html'];
 const content=new Map(pageNames.map(name=>[name,readFileSync(join(root,name),'utf8')]));
 const allText=[...content.values()].join('\n');
 const js=readFileSync(join(root,'assets/site.js'),'utf8');
@@ -116,6 +116,7 @@ test('Netlify form is real, phone-first, and accepts visitors without email',()=
 test('will drafting enquiry survives the uploaded update',()=>{
  const s=content.get('services.html');
  assert.match(s,/Let us help you draft your will/);
+ assert.match(s,/href="will-drafting.html"/);
  assert.match(s,/contact\.html\?service=will-preparation#enquiry/);
  assert.match(content.get('contact.html'),/value="will-preparation"/);
  assert.match(js,/new URLSearchParams\(window\.location\.search\)\.get\('service'\)/);
@@ -159,4 +160,44 @@ test('uploaded photo-based brand remains intact',()=>{
 test('CI workflow is retained and runs the site tests',()=>{
  const workflow=readFileSync(join(root,'.github/workflows/site-check.yml'),'utf8');
  assert.match(workflow,/npm test/);
+});
+
+test('original Will & Testament questionnaire is linked as its own estate-planning service',()=>{
+ const will=content.get('will-drafting.html');
+ const service=content.get('services.html');
+ assert.match(service,/href="will-drafting.html"/);
+ assert.match(will,/WILL &amp; TESTAMENT — INTAKE QUESTIONNAIRE/);
+ assert.match(will,/Let's draft your <em>will<\/em>, clause by clause/);
+ for(const label of ['Start','Your details','Marital status','Spouse','Children','Bequests','Final wishes','Review']) assert.ok(will.includes(`<li>${label}</li>`),label);
+});
+test('will page uses only the clients supplied original endpoint and never collects answers',()=>{
+ const will=content.get('will-drafting.html');
+ assert.match(will,/data-source="https:\/\/willintakeform.netlify.app\/"/);
+ assert.match(will,/id="will-intake-frame"/);
+ assert.match(will,/referrerpolicy="no-referrer"/);
+ assert.match(will,/sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-downloads"/);
+ assert.match(will,/id="load-will-intake"/);
+ assert.match(will,/target="_blank" rel="noopener noreferrer"/);
+ assert.doesNotMatch(will,/<form\b/);
+ assert.doesNotMatch(will,/name="(?:identity-number|assets|beneficiaries)"/);
+ assert.match(will,/Confirm the intended recipient and confidentiality arrangements/);
+ assert.match(will,/does not, by itself, create an executed, legally valid will/);
+});
+test('the will iframe only loads after an intentional visitor click',()=>{
+ assert.match(js,/willStart.addEventListener\('click'/);
+ assert.match(js,/source !== 'https:\/\/willintakeform.netlify.app\/'/);
+ assert.match(js,/willFrame.src = source/);
+ assert.match(js,/willFrame.hidden = false/);
+ assert.match(js,/willPlaceholder.hidden = true/);
+ const will=content.get('will-drafting.html');
+ assert.doesNotMatch(will,/<iframe[^>]*\ssrc=/);
+});
+test('visual style is still photographic, with a direct fallback to original form',()=>{
+ const will=content.get('will-drafting.html');
+ assert.match(will,/class="will-hero-visual image-with-fallback"/);
+ assert.match(will,/images.unsplash.com/);
+ assert.match(will,/href="https:\/\/willintakeform.netlify.app\/"/);
+ assert.match(css,/\.will-hero/);
+ assert.match(css,/\.will-intake-area/);
+ assert.match(css,/will-frame-placeholder\[hidden\]/);
 });
