@@ -159,7 +159,8 @@ test('uploaded photo-based brand remains intact',()=>{
 
 test('CI workflow is retained and runs the site tests',()=>{
  const workflow=readFileSync(join(root,'.github/workflows/site-check.yml'),'utf8');
- assert.match(workflow,/npm test/);
+ assert.match(workflow,/npm run check/);
+ assert.match(workflow,/python3 scripts\/build-pages\.py/);
 });
 
 test('our own will worksheet replaces the previous external embed',()=>{

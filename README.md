@@ -10,6 +10,23 @@ widget were integrated; the latest phone-first Netlify enquiry form and estate/w
 CTA were preserved. The ZIP's email-required form, mailto-only submission and
 fake success confirmation were deliberately not imported.
 
+## Deployment preparation (October 2026)
+
+- `npm run build` assembles an allowlisted public `dist/` directory for Netlify.
+  The Netlify configuration builds this automatically when connected to GitHub.
+- `npm run check` builds and runs static/form/privacy contract tests.
+- `node scripts/smoke-live.mjs https://YOUR-SITE.netlify.app EXPECTED_SHA`
+  performs a read-only smoke test on the deployed HTTPS site.
+- **General enquiries:** Netlify Forms is the existing backend; live submission
+  receipt, notifications and authorised staff access require Netlify dashboard
+  configuration and a real readback test.
+- **Will drafting:** deliberately browser-only. There is no confidential will-data
+  receiving endpoint, database or insecure email fallback. Do not turn on online
+  storage until the consultancy approves the questions, legal/privacy scope,
+  access controls and secure processing/storage arrangements.
+- See `docs/DEPLOYMENT_READINESS.md` for release gates and rollback guidance,
+  and `docs/CLIENT_FEEDBACK_INTAKE.md` for safely incorporating client edits.
+
 ## Run locally
 
 Node.js 20+ required. Run `npm run dev` and open http://localhost:4173.

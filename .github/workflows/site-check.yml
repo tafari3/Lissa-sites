@@ -11,4 +11,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm test
+      - name: Check generated pages are committed
+        run: |
+          python3 scripts/build-pages.py
+          git diff --exit-code -- '*.html'
+      - name: Build and test the publishable website
+        run: npm run check

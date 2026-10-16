@@ -208,6 +208,18 @@
     renumberGifts();
     showStep(0);
   });
+  // Prevent browser autofill from intentionally retaining private instructions.
+  form.querySelectorAll('input, textarea, select').forEach(input => {
+    input.autocomplete = 'off';
+  });
+  // Also clear the page before it could be restored from the back-forward cache.
+  window.addEventListener('pagehide', () => {
+    form.querySelectorAll('input, textarea, select').forEach(input => {
+      if (input.type === 'radio' || input.type === 'checkbox') input.checked = false;
+      else input.value = '';
+    });
+    review.replaceChildren();
+  });
   renumberGifts();
   showStep(0, false);
 })();

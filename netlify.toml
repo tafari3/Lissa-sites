@@ -1,0 +1,8 @@
+# Git-connected Netlify deployments build only the public dist/ directory.
+# Never publish repository root: that would expose development and test files.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

@@ -39,8 +39,36 @@
   const enquiryForm = document.getElementById('enquiry-form');
   const hostname = window.location.hostname;
   const unsupportedPreview = window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.github.io');
+  // Keep the general enquiry phone-first, but reject empty/obviously invalid
+  // contact details before the browser can send anything to Netlify Forms.
+  // This is client-side hygiene, not a substitute for provider spam filtering.
+  if (enquiryForm) {
+    const nameInput = enquiryForm.elements.namedItem('name');
+    const phoneInput = enquiryForm.elements.namedItem('phone');
+    const messageInput = enquiryForm.elements.namedItem('message');
+    for (const item of [nameInput, phoneInput, messageInput]) {
+      item.addEventListener('input', () => item.setCustomValidity(''));
+    }
+    enquiryForm.addEventListener('submit', event => {
+      for (const item of [nameInput, phoneInput, messageInput]) {
+        item.value = item.value.trim();
+      }
+      if (!nameInput.value) nameInput.setCustomValidity('Please enter your name.');
+      if ((phoneInput.value.match(/[0-9]/g) || []).length < 7) {
+        phoneInput.setCustomValidity('Enter a reachable phone number with at least seven digits.');
+      }
+      if (!messageInput.value) messageInput.setCustomValidity('Please describe your enquiry.');
+      const invalid = [nameInput, phoneInput, messageInput].find(input => !input.checkValidity());
+      if (invalid) {
+        event.preventDefault();
+        invalid.reportValidity();
+        invalid.focus();
+      }
+    });
+  }
   if (enquiryForm && unsupportedPreview) {
     enquiryForm.addEventListener('submit', event => {
+      if (event.defaultPrevented || !enquiryForm.checkValidity()) return;
       event.preventDefault();
       const notice = document.getElementById('form-preview-note');
       if (notice) { notice.hidden = false; notice.focus(); }
