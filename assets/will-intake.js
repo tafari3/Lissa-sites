@@ -219,6 +219,11 @@
       else input.value = '';
     });
     review.replaceChildren();
+    giftList.querySelectorAll('[data-will-gift]').forEach((item, index) => {
+      if (index > 0) item.remove();
+    });
+    renumberGifts();
+    showStep(0, false);
   });
   renumberGifts();
   showStep(0, false);

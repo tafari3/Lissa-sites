@@ -58,3 +58,12 @@ test('preview release metadata cannot falsely claim a live backend is enabled', 
   assert.match(meta.enquiryProvider, /requires site-side form detection/);
   assert.match(publish('robots.txt'), /Disallow: \/\s*$/m);
 });
+
+// Sensitive in-memory fields must also be cleared when the browser navigates
+// away, so back/forward restoration cannot reveal an old review summary.
+test('will intake clears private fields and returns to Start when leaving', () => {
+  const script = read('assets/will-intake.js');
+  assert.match(script, /addEventListener\('pagehide'/);
+  assert.match(script, /review\.replaceChildren\(\)/);
+  assert.match(script, /showStep\(0, false\)/);
+});
