@@ -162,42 +162,52 @@ test('CI workflow is retained and runs the site tests',()=>{
  assert.match(workflow,/npm test/);
 });
 
-test('original Will & Testament questionnaire is linked as its own estate-planning service',()=>{
+test('our own will worksheet replaces the previous external embed',()=>{
  const will=content.get('will-drafting.html');
- const service=content.get('services.html');
- assert.match(service,/href="will-drafting.html"/);
- assert.match(will,/WILL &amp; TESTAMENT — INTAKE QUESTIONNAIRE/);
- assert.match(will,/Let's draft your <em>will<\/em>, clause by clause/);
- for(const label of ['Start','Your details','Marital status','Spouse','Children','Bequests','Final wishes','Review']) assert.ok(will.includes(`<li>${label}</li>`),label);
-});
-test('will page uses only the clients supplied original endpoint and never collects answers',()=>{
- const will=content.get('will-drafting.html');
- assert.match(will,/data-source="https:\/\/willintakeform.netlify.app\/"/);
- assert.match(will,/id="will-intake-frame"/);
- assert.match(will,/referrerpolicy="no-referrer"/);
- assert.match(will,/sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-downloads"/);
- assert.match(will,/id="load-will-intake"/);
- assert.match(will,/target="_blank" rel="noopener noreferrer"/);
+ const services=content.get('services.html');
+ const script=readFileSync(join(root,'assets/will-intake.js'),'utf8');
+ assert.match(services,/href="will-drafting.html"/);
+ assert.match(will,/WILL &amp; TESTAMENT - PREPARATION QUESTIONNAIRE/);
+ assert.match(will,/<div[^>]+id="will-questionnaire"[^>]+role="group"/);
  assert.doesNotMatch(will,/<form\b/);
- assert.doesNotMatch(will,/name="(?:identity-number|assets|beneficiaries)"/);
- assert.match(will,/Confirm the intended recipient and confidentiality arrangements/);
- assert.match(will,/does not, by itself, create an executed, legally valid will/);
-});
-test('the will iframe only loads after an intentional visitor click',()=>{
- assert.match(js,/willStart.addEventListener\('click'/);
- assert.match(js,/source !== 'https:\/\/willintakeform.netlify.app\/'/);
- assert.match(js,/willFrame.src = source/);
- assert.match(js,/willFrame.hidden = false/);
- assert.match(js,/willPlaceholder.hidden = true/);
- const will=content.get('will-drafting.html');
- assert.doesNotMatch(will,/<iframe[^>]*\ssrc=/);
-});
-test('visual style is still photographic, with a direct fallback to original form',()=>{
- const will=content.get('will-drafting.html');
- assert.match(will,/class="will-hero-visual image-with-fallback"/);
- assert.match(will,/images.unsplash.com/);
- assert.match(will,/href="https:\/\/willintakeform.netlify.app\/"/);
+ assert.match(will,/src="assets\/will-intake.js" defer/);
+ for(const label of ['Start','Your details','Marital status','Spouse','Children','Bequests','Final wishes','Review']) assert.match(will,new RegExp(`<li[^>]*>${label}</li>`));
+ assert.match(will,/name="wants_will" value="Yes" required/);
+ assert.match(will,/name="wants_will" value="No" required/);
+ assert.match(will,/id="will-step-review-title"/);
+ assert.match(will,/id="will-print"/);
+ assert.match(will,/id="will-clear"/);
+ assert.match(will,/id="will-add-gift"/);
+ for(const attr of ['data-will-step="0"','data-will-step="1"','data-will-step="2"','data-will-step="3"','data-will-step="4"','data-will-step="5"','data-will-step="6"','data-will-step="7"']) assert.ok(will.includes(attr),attr);
+ assert.doesNotMatch(will,/<iframe\b|data-source=|Open original form|original questionnaire/i);
+ assert.doesNotMatch(will,/<form[^>]*\saction=|<form[^>]*\smethod=/);
+ assert.doesNotMatch(will,/data-netlify=|name="form-name"/);
+ assert.doesNotMatch(allText + js + script + readFileSync(join(root,'scripts/build-pages.py'),'utf8') + readFileSync(join(root,'README.md'),'utf8'),/willintakeform\.netlify\.app/i);
+ assert.doesNotMatch(script,/fetch\s*\(|XMLHttpRequest|sendBeacon\s*\(|localStorage\.|sessionStorage\.|\.submit\s*\(/);
+ assert.match(script,/This is deliberately NOT an HTML form/);
+ assert.match(script,/window\.print\(\)/);
+ assert.match(script,/\.textContent = contents/);
+ assert.match(script,/renderReview\(\)/);
+ assert.match(script,/renumberGifts\(\)/);
  assert.match(css,/\.will-hero/);
- assert.match(css,/\.will-intake-area/);
- assert.match(css,/will-frame-placeholder\[hidden\]/);
+ assert.match(css,/\.will-questionnaire/);
+ assert.match(will,/proposed consultancy intake flow and require the firm/);
+ assert.match(will,/Your answers are not transmitted/);
+});
+
+test('general Netlify enquiry is separate and remains phone-first',()=>{
+ const contact=content.get('contact.html');
+ const will=content.get('will-drafting.html');
+ assert.match(contact,/<form[^>]+data-netlify="true"/);
+ assert.match(contact,/name="phone"[^>]*required/);
+ assert.match(contact,/value="will-preparation"/);
+ assert.match(will,/contact\.html\?service=will-preparation#enquiry/);
+ assert.doesNotMatch(will,/data-netlify="true"/);
+});
+
+test('print layout only hides other page content while printing will review',()=>{
+ assert.match(content.get('will-drafting.html'),/<body id="top" class="will-page">/);
+ assert.doesNotMatch(content.get('index.html'),/class="will-page"/);
+ assert.match(css,/body\.will-page\.will-print-only \* \{ visibility: hidden/);
+ assert.doesNotMatch(css,/(?<!\.)body \* \{ visibility: hidden/);
 });

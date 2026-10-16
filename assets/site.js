@@ -81,21 +81,5 @@
     });
   }
 
-  // Load the exact original questionnaire only when the visitor chooses to start.
-  // No will answers or personal information are collected or stored by this site.
-  const willStart = document.getElementById('load-will-intake');
-  const willFrame = document.getElementById('will-intake-frame');
-  const willPlaceholder = document.getElementById('will-frame-placeholder');
-  if (willStart && willFrame && willPlaceholder) {
-    willStart.addEventListener('click', () => {
-      const source = willFrame.dataset.source;
-      // Fixed allowlisted destination; never use a query string to set iframe.src.
-      if (source !== 'https://willintakeform.netlify.app/') return;
-      willFrame.src = source;
-      willFrame.hidden = false;
-      willPlaceholder.hidden = true;
-      willFrame.focus({ preventScroll: true });
-    });
-  }
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 })();

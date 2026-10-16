@@ -46,10 +46,31 @@ represented as client projects. Obtain approved licensed/company imagery for lau
 Remove staging `noindex`/`robots.txt` exclusions only after the client authorises
 indexing and the contact, privacy and legal review is complete.
 
-## Dedicated Will & Testament questionnaire
+## Native Will & Testament preparation worksheet
 
-`will-drafting.html` is linked from **Services -> Estate Planning & Property Advisory**. It preserves the requested photo-based navy-and-gold brand and displays the client's **actual external questionnaire** from `https://willintakeform.netlify.app/` after the visitor selects **Start the questionnaire**. An explicit **Open original form** link is always available, including when the outside service disallows embedding with `frame-ancestors` or `X-Frame-Options`.
+**Services -> Estate Planning & Property Advisory -> Will Drafting** opens a native,
+photograph-led eight-stage questionnaire, implemented entirely in our website.
+It is NOT an external form, an iframe, or a link to a different site. The stage
+names and the first Yes/No question came from the supplied screenshot; other
+questions are a **proposed consultancy intake design**, not a claimed exact
+transcription and not approved legal drafting instructions.
 
-The eight stage names and start question are grounded in the client screenshot. The complete set of underlying form questions was **not** available to inspect, and has **not** been invented or copied into this repository. The will questionnaire is not implemented with Netlify Forms on this site. Submissions, identity information, family details and asset information remain with the **original external provider**, outside the consultancy's public GitHub site and general enquiry inbox. No external will form is loaded automatically before the visitor opts in.
+The steps are Start, Your details, Marital status, Spouse, Children, Bequests,
+Final wishes and Review. Navigation validates required fields, adapts spouse and
+children questions, lets users add and remove gifts, and builds a printable
+summary. Review includes edit buttons. Reset clears the worksheet.
 
-Before treating this as a fully commissioned client intake flow, confirm **ownership/authorization, data controller and recipient, secure storage and access restrictions, consent/privacy notice, retention/deletion policy and the applicable legal review** for the existing will-intake service. Verify that the original service actually loads when framed in the production Netlify deployment; if it does not, visitors can open it in a separate tab. Do not claim the form has been successfully submitted merely because the iframe loaded. No completed will is generated or legally executed by this landing page.
+**Important privacy boundary:** Sensitive answers exist only in the browser's
+current page memory; no form action, Netlify submission, tracking, storage,
+mail or outside questionnaire receives them. Refreshing or closing the page
+loses those answers. Visitors can print / save a private PDF locally, and can
+request a professional consultation through the **separate general enquiry**
+form, which must not be used to transmit personal will instructions.
+
+Before enabling receipt or storage of detailed family, beneficiary and asset
+information, the client must approve the questions and review the legal scope,
+privacy notice, access control, secure processing, retention, deletion, response
+ownership and server-side handling. A secure backend is not present, and this
+questionnaire is **not a legally executed will**. The client should also verify
+all business contact details, imagery rights and delivery of ordinary Netlify
+enquiries before launch.
