@@ -27,6 +27,13 @@ fake success confirmation were deliberately not imported.
 - See `docs/DEPLOYMENT_READINESS.md` for release gates and rollback guidance,
   and `docs/CLIENT_FEEDBACK_INTAKE.md` for safely incorporating client edits.
 
+
+## ZCHPC CloudPanel staging build
+
+`npm run build:cloudpanel` creates a separate `dist-cloudpanel/` allowlisted preview package for a Generic PHP Site in CloudPanel. This deliberately removes the Netlify-specific general enquiry POST and replaces it with WhatsApp/phone contact until an authenticated server-side SMTP enquiry endpoint is implemented and proven. The client-side will preparation remains private and browser-only.
+
+Run `npm run check:cloudpanel` to validate it, then upload **only the contents of** `dist-cloudpanel/` to this site's verified CloudPanel document root. See `docs/CLOUDPANEL_PREVIEW_READINESS.md` for safe DNS, TLS, host and backend acceptance gates. The CloudPanel preview is not a customer-ready submission service.
+
 ## Run locally
 
 Node.js 20+ required. Run `npm run dev` and open http://localhost:4173.
