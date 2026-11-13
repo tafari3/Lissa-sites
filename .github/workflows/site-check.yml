@@ -17,3 +17,9 @@ jobs:
           git diff --exit-code -- '*.html'
       - name: Build and test the publishable website
         run: npm run check
+      - name: Check CloudPanel production candidate (offline only)
+        run: |
+          COMMIT_REF="${GITHUB_SHA}" npm run build:cloudpanel:production
+          node --test tests/cloudpanel-production.spec.mjs
+          php tests/contact-backend.test.php
+          node tests/cloudpanel-http.mjs

@@ -7,3 +7,10 @@ coverage/
 
 # Public build output
 dist/
+
+# CloudPanel generated artifacts and private mail dependencies
+dist-cloudpanel/
+dist-cloudpanel-production/
+backend/private/vendor/
+backend/private/sessions/
+backend/private/rate-limits/

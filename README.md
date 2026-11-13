@@ -102,3 +102,9 @@ enquiries before launch.
 ## Client-supplied professional profile (November 2026)
 
 The About Us page includes a portrait and client-supplied biography of **Nevanji T. Mutumbwa** under Our People, and Governance & Legal Services links directly to that profile. The optimized local asset `assets/nevanji-mutumbwa.webp` is copied into the static publish directory. The source photograph was provided by the client; no unsupported job title, qualifications or leadership designation have been introduced.
+
+## CloudPanel production backend candidate (November 2026)
+
+The previous `build:cloudpanel` remains a preview with online enquiry submission disabled. A *separate* `build:cloudpanel:production` now creates `dist-cloudpanel-production/public/` (static site plus a scoped PHP contact endpoint) and `dist-cloudpanel-production/private/` (PHP validation/mailer source and Composer manifest, kept **outside webroot**). The backend is intentionally **fail-closed** until the receiving SMTP account, PHP-FPM site configuration, anti-abuse directories and actual live delivery are commissioned. It accepts general contact enquiries only, never confidential Will Drafting answers.
+
+Run `COMMIT_REF=<EXACT_40_CHARACTER_SHA> npm run check:cloudpanel:production` for build, PHP syntax/validation, security contract and isolated HTTP tests. The fake email transport in the HTTP test is **not a substitute for real inbox receipt**. Read `docs/CLOUDPANEL_PRODUCTION_RUNBOOK.md` for the exact DNS, CloudPanel, secrets, TLS, legal/privacy and release gates. The main website still retains staging indexing restrictions until client authorization.

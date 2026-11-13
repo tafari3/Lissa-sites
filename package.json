@@ -9,7 +9,9 @@
     "test": "node --test tests/*.test.mjs",
     "check": "npm run build:cloudpanel && npm test",
     "build:cloudpanel": "node scripts/build-cloudpanel.mjs",
-    "check:cloudpanel": "npm run check"
+    "check:cloudpanel": "npm run check",
+    "build:cloudpanel:production": "node scripts/build-cloudpanel-production.mjs",
+    "check:cloudpanel:production": "npm run build:cloudpanel:production && node --test tests/cloudpanel-production.spec.mjs && php tests/contact-backend.test.php && node tests/cloudpanel-http.mjs"
   },
   "engines": {
     "node": ">=20"

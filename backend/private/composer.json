@@ -1,0 +1,10 @@
+{
+  "name": "serina/contact-delivery",
+  "type": "project",
+  "private": true,
+  "require": {
+    "php": "^8.2",
+    "ext-openssl": "*",
+    "phpmailer/phpmailer": "^7.2"
+  }
+}
