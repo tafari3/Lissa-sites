@@ -1,12 +1,12 @@
 # Serina Bhasera Consultancy — ZCHPC CloudPanel preview readiness
 
 ## Scope
-Source: `tafari3/Lissa-sites`, reviewed at commit `32c92a1e3e39af932da9f99f3defd8abf56b1695`.
+Source: `tafari3/Lissa-sites` branch `main`. Bind each deployment to its exact Git commit SHA (do not reuse an earlier staging revision).
 Deployment domain: `nyandagreatmindsconsultancy.co.zw` (owner has described Nyanda and Serina as the same company; confirm public-facing brand).
 
 ## Build
 
-Run `COMMIT_REF=32c92a1e3e39af932da9f99f3defd8abf56b1695 npm run build:cloudpanel` and deploy **only the contents of** `dist-cloudpanel/`.
+Run `COMMIT_REF="$(git rev-parse HEAD)" npm run build:cloudpanel` from a clean repository checkout, or supply the verified 40-character commit SHA explicitly and deploy **only the contents of** `dist-cloudpanel/`.
 Do not deploy source, `.git`, scripts, tests, private documents, or credential files.
 This is a **staging preview**, not a completed production deployment.
 
