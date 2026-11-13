@@ -47,6 +47,7 @@ for (const name of ['index.html','services.html','sectors.html','about.html','wi
 const infoFile = join(out, 'release-info.json');
 const info = JSON.parse(await readFile(infoFile, 'utf8'));
 info.hosting = 'ZCHPC CloudPanel preview';
+info.enquiryProvider = 'disabled — ZCHPC authenticated mail endpoint not commissioned';
 info.formMode = 'disabled-until-secure-endpoint-commissioned';
 info.willSubmission = 'disabled';
 info.indexing = 'disabled-client-review';

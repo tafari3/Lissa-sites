@@ -45,6 +45,8 @@ test('keeps client-review indexing restrictions and accurate release mode', asyn
  const info=JSON.parse(await get('release-info.json'));
  assert.match(info.revision, /^[a-f\d]{40}$/);
  assert.equal(info.formMode,'disabled-until-secure-endpoint-commissioned');
+ assert.match(info.enquiryProvider,/disabled/);
+ assert.doesNotMatch(info.enquiryProvider,/Netlify/);
  assert.equal(info.willSubmission,'disabled');
  assert.match(await get('robots.txt'), /Disallow:\s*\//);
  for(const page of pages) assert.match(await get(page), /name="robots" content="noindex, nofollow"/);
