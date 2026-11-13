@@ -212,3 +212,19 @@ test('print layout only hides other page content while printing will review',()=
  assert.match(css,/body\.will-page\.will-print-only \* \{ visibility: hidden/);
  assert.doesNotMatch(css,/(?<!\.)body \* \{ visibility: hidden/);
 });
+
+
+test('client-supplied legal professional is correctly presented in About Us',()=>{
+ const about=content.get('about.html');
+ const service=content.get('services.html');
+ assert.match(about, /id="people"/);
+ assert.match(about, /id="people-heading">Nevanji T\. Mutumbwa/);
+ assert.match(about, /assets\/nevanji-mutumbwa\.webp/);
+ assert.match(about, /alt="Portrait of Nevanji T\. Mutumbwa wearing a dark suit"/);
+ for(const phrase of ['Legal Professional','Commercial Law','Corporate Governance','law, business management, labour relations and commercial enterprise','economic development and sustainable growth']) assert.ok(about.includes(phrase), phrase);
+ assert.match(service, /href="about\.html#people"/);
+ assert.match(about, /contact\.html\?service=governance#enquiry/);
+ assert.doesNotMatch(about,/\b(?:Managing Partner|Founder|Senior Partner|Director|LLB|admitted attorney)\b/i);
+ assert.ok(existsSync(join(root,'assets/nevanji-mutumbwa.webp')));
+ assert.match(css,/\.people-feature-layout/);
+});

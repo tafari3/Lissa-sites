@@ -111,6 +111,27 @@ home=f'''<section class="hero"><div class="hero-inner"><div class="hero-copy"><d
 about=page_intro('THE FIRM','A multidisciplinary approach to development.','Serina Bhasera Consultancy works with developers, landowners, businesses and organisations navigating the built environment in Zimbabwe.')+f'''
 <section class="section about-page"><div class="container about-page-grid"><div><p class="kicker">WHO WE ARE</p><h2>Advice that considers the full picture.</h2></div><div class="prose"><p class="prose-lead">Serina Bhasera Consultancy brings together expertise in land planning, environmental consulting, technical design, ESG strategy, governance and strategic advisory.</p><p>Our clients work across property development, construction, commercial enterprise, infrastructure, mining, the public sector and other industries requiring regulatory approvals, technical coordination and long-term planning.</p><p>We support decisions from early project concepts and land use considerations through approvals, compliance and delivery planning.</p></div></div></section>
 <section class="image-story"><div class="container image-story-grid"><div class="image-story-visual image-with-fallback"><div class="sector-visual-fallback" aria-hidden="true"><span>THE PRACTICE</span><strong>Planning.<br>Technical design.<br>Advisory.</strong></div><img src="{IMAGES['interior']}" width="1200" height="900" loading="lazy" alt="Illustrative modern built-environment interior"></div><div class="image-story-text"><p class="kicker">OUR APPROACH</p><h2>Joined-up thinking for complex requirements.</h2><p>Development decisions often involve several disciplines at once. Land use, environmental obligations, infrastructure needs and governance considerations need to work together.</p><p>Our practice areas are structured to help clients address these connected requirements in a clear and practical way.</p><a class="text-link text-link-dark" href="services.html">Explore our practice areas <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="people-feature" id="people" aria-labelledby="people-heading">
+  <div class="container">
+    <div class="people-feature-header"><p class="kicker kicker-inverse">OUR PEOPLE</p><p class="people-feature-category">LEGAL &amp; COMMERCIAL ADVISORY</p></div>
+    <div class="people-feature-layout">
+      <figure class="people-feature-photo">
+        <img src="assets/nevanji-mutumbwa.webp" width="852" height="1280" loading="lazy" decoding="async" alt="Portrait of Nevanji T. Mutumbwa wearing a dark suit" />
+        <figcaption>Nevanji T. Mutumbwa</figcaption>
+      </figure>
+      <div class="people-feature-content">
+        <p class="people-feature-label">PROFESSIONAL PROFILE</p>
+        <h2 id="people-heading">Nevanji T. Mutumbwa</h2>
+        <p class="people-feature-role">Legal Professional <span aria-hidden="true">|</span> Commercial Law <span aria-hidden="true">|</span> Corporate Governance</p>
+        <div class="people-feature-description">
+          <p>Nevanji Mutumbwa is a legal professional, entrepreneur and commercial law specialist with a multidisciplinary background spanning law, business management, labour relations and commercial enterprise.</p>
+          <p>He is passionate about the intersection of law, business, economic development and sustainable growth.</p>
+        </div>
+        <a class="people-feature-link" href="contact.html?service=governance#enquiry">Enquire about legal &amp; governance advisory <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="section about-statement"><div class="container about-statement-inner"><div><p class="kicker">OUR SCOPE</p><h2>Serving a range of sectors and organisations.</h2></div><div><p>From commercial and residential development to sustainability reporting, governance and board training, our advisory scope is intentionally broad.</p><a class="text-link text-link-dark" href="sectors.html">View who we serve <span aria-hidden="true">↗</span></a></div></div></section>'''
 
 will_callout = '<div class="will-cta"><p class="will-eyebrow">WILL PREPARATION &amp; SUCCESSION</p><h3>Let us help you draft your will.</h3><p>Use our guided Will &amp; Testament preparation questionnaire to organise your wishes before a professional consultation. This is separate from a general website enquiry.</p><a class="button button-gold" href="will-drafting.html">Begin your questionnaire <span aria-hidden="true">&#8599;</span></a><a class="will-cta-alt" href="contact.html?service=will-preparation#enquiry">Prefer to speak to the team first? <span aria-hidden="true">&#8599;</span></a></div>'
@@ -129,6 +150,8 @@ for num,anchor,title,desc,tags in services_data:
  services+=f'<article class="service-detail" id="{anchor}"><div class="service-detail-title"><span class="service-num">{num} / PRACTICE AREA</span><h2>{title}</h2></div><div class="service-detail-body"><p>{desc}</p><ul class="service-offerings">'+''.join(f'<li>{tag}</li>' for tag in tags)+f'</ul><a class="text-link text-link-dark" href="contact.html?service={anchor}#enquiry">Enquire about this service <span aria-hidden="true">&#8599;</span></a>'
  if anchor == 'estate':
   services+=will_callout
+ if anchor == 'governance':
+  services+='<p class="governance-profile-link"><a href="about.html#people">Meet Nevanji T. Mutumbwa, legal &amp; commercial advisory <span aria-hidden="true">&#8599;</span></a></p>'
  services+='</div></article>'
 services+='''</div></div></section><section class="additional-services"><div class="container additional-grid"><div><p class="kicker kicker-inverse">ADDITIONAL ADVISORY</p><h2>Related areas of work.</h2></div><div><p>The firm has also identified auditing as an area of service. Specific assignments and requirements can be discussed directly.</p><a class="light-link" href="contact.html">Discuss your requirements <span aria-hidden="true">↗</span></a></div></div></section>'''
 

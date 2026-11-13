@@ -91,3 +91,7 @@ ownership and server-side handling. A secure backend is not present, and this
 questionnaire is **not a legally executed will**. The client should also verify
 all business contact details, imagery rights and delivery of ordinary Netlify
 enquiries before launch.
+
+## Client-supplied professional profile (November 2026)
+
+The About Us page includes a portrait and client-supplied biography of **Nevanji T. Mutumbwa** under Our People, and Governance & Legal Services links directly to that profile. The optimized local asset `assets/nevanji-mutumbwa.webp` is copied into the static publish directory. The source photograph was provided by the client; no unsupported job title, qualifications or leadership designation have been introduced.

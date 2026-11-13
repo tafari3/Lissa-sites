@@ -15,7 +15,7 @@ test('Netlify builds a private, allowlisted public directory rather than reposit
   assert.match(config, /command\s*=\s*"npm run build"/);
   const allowedRoot = ['_headers', 'about.html', 'assets', 'contact.html', 'index.html', 'release-info.json', 'robots.txt', 'sectors.html', 'services.html', 'thank-you.html', 'will-drafting.html'];
   assert.deepEqual(readdirSync(dist).sort(), allowedRoot);
-  assert.deepEqual(readdirSync(join(dist, 'assets')).sort(), ['favicon.png', 'serina-logo.png', 'site.js', 'styles.css', 'will-intake.js']);
+  assert.deepEqual(readdirSync(join(dist, 'assets')).sort(), ['favicon.png', 'nevanji-mutumbwa.webp', 'serina-logo.png', 'site.js', 'styles.css', 'will-intake.js']);
   for (const name of ['README.md','package.json','netlify.toml','scripts','tests','.git','.github']) assert.ok(!existsSync(join(dist, name)), name);
   for (const page of ['index','about','services','sectors','contact','thank-you','will-drafting']) {
     assert.equal(publish(page + '.html'), read(page + '.html'), page);

@@ -13,7 +13,8 @@ const pages = [
 ];
 const assets = [
   'assets/styles.css', 'assets/site.js', 'assets/will-intake.js',
-  'assets/serina-logo.png', 'assets/favicon.png', 'robots.txt'
+  'assets/serina-logo.png', 'assets/favicon.png',
+  'assets/nevanji-mutumbwa.webp', 'robots.txt'
 ];
 const revision = process.env.COMMIT_REF || process.env.RELEASE_SHA || process.env.GITHUB_SHA || 'local-preview';
 if (!/^(local-preview|[a-f0-9]{7,40})$/.test(revision)) {
